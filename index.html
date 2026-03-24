@@ -297,8 +297,54 @@
             font-weight: 700;
         }
 
+        /* GPG signatures section */
+        .gpg-signatures {
+            margin: 2rem 0 3rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .gpg-signatures h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            color: var(--green);
+            margin-bottom: 1rem;
+        }
+
+        .gpg-signatures .gpg-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            justify-content: center;
+        }
+
+        .gpg-signatures a {
+            color: #94a3b8;
+            background: rgba(16, 185, 129, 0.05);
+            padding: 0.6rem 1.2rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            border: 1px solid var(--border);
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .gpg-signatures a:hover {
+            background: var(--green);
+            color: var(--bg);
+            border-color: var(--green);
+        }
+
         footer {
-            margin-top: 6rem;
+            margin-top: 2rem;
             padding: 4rem 0;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
             text-align: center;
@@ -378,8 +424,10 @@
         </div>
 
         <div class="button-row animate-in">
-            <a href="https://github.com/Heiwabitnull/rxb-core-binaries.git" class="btn" download id="btn-win">DOWNLOAD RXB FOR WINDOWS</a>
-            <a href="https://github.com/Heiwabitnull/rxb-core-binaries.git" class="btn" download id="btn-linux">DOWNLOAD RXB TAR.GZ FOR LINUX</a>
+            <!-- UPDATED: Windows direct binary link -->
+            <a href="https://github.com/Heiwabitnull/rxb-core-binaries/raw/main/RXBforWin/rxb-0.1.0-win64-setup.exe" class="btn" download id="btn-win">DOWNLOAD RXB FOR WINDOWS</a>
+            <!-- UPDATED: Linux direct tar.gz link -->
+            <a href="https://github.com/Heiwabitnull/rxb-core-binaries/releases/download/v0.1.0/rxb-0.1.0-linux64.tar.gz" class="btn" download id="btn-linux">DOWNLOAD RXB TAR.GZ FOR LINUX</a>
         </div>
 
         <div class="genesis-card animate-in">
@@ -846,6 +894,20 @@ I wish you success in mining.
 
 Be good and do good.
             </pre>
+        </div>
+
+        <!-- NEW GPG SIGNATURES SECTION (added at the bottom) -->
+        <div class="gpg-signatures animate-in">
+            <h3>🔐 GPG SIGNATURES</h3>
+            <div class="gpg-links">
+                <a href="https://github.com/Heiwabitnull/rxb-core-binaries/raw/main/RXBforWin/rxb-0.1.0-win64-setup.exe.asc" target="_blank" rel="noopener noreferrer">
+                    📄 Windows signature (.asc)
+                </a>
+                <a href="https://github.com/Heiwabitnull/rxb-core-binaries/releases/download/v0.1.0/rxb-0.1.0-linux64.tar.gz.asc" target="_blank" rel="noopener noreferrer">
+                    📄 Linux signature (.asc)
+                </a>
+            </div>
+            <p style="font-size: 0.75rem; margin-top: 1rem; opacity: 0.7;">Verify integrity with GPG — signatures for both binaries</p>
         </div>
 
         <footer class="animate-in">
