@@ -297,7 +297,20 @@
             font-weight: 700;
         }
 
-        /* GPG signatures section */
+        .tor-notice {
+            text-align: center;
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid var(--green);
+            border-radius: 40px;
+            padding: 0.7rem 1.5rem;
+            max-width: 85%;
+            margin: 0 auto 2rem auto;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--green);
+            backdrop-filter: blur(2px);
+        }
+
         .gpg-signatures {
             margin: 2rem 0 3rem;
             padding: 1.5rem;
@@ -407,6 +420,10 @@
             </div>
         </div>
 
+        <div class="tor-notice animate-in">
+            RXB operates as a Tor Onion only network. Tor must be installed and configured to use RXB.
+        </div>
+
         <img src="https://raw.githubusercontent.com/Heiwabitnull/RXB_logo/main/RXBlogo.png" alt="RXB" class="main-logo animate-in">
 
         <h1 class="animate-in">RXB</h1>
@@ -424,9 +441,7 @@
         </div>
 
         <div class="button-row animate-in">
-            <!-- UPDATED: Windows direct binary link -->
             <a href="https://github.com/Heiwabitnull/rxb-core-binaries/raw/main/RXBforWin/rxb-0.1.0-win64-setup.exe" class="btn" download id="btn-win">DOWNLOAD RXB FOR WINDOWS</a>
-            <!-- UPDATED: Linux direct tar.gz link -->
             <a href="https://github.com/Heiwabitnull/rxb-core-binaries/releases/download/v0.1.0/rxb-0.1.0-linux64.tar.gz" class="btn" download id="btn-linux">DOWNLOAD RXB TAR.GZ FOR LINUX</a>
         </div>
 
@@ -896,15 +911,14 @@ Be good and do good.
             </pre>
         </div>
 
-        <!-- NEW GPG SIGNATURES SECTION (added at the bottom) -->
         <div class="gpg-signatures animate-in">
-            <h3>🔐 GPG SIGNATURES</h3>
+            <h3>GPG SIGNATURES</h3>
             <div class="gpg-links">
                 <a href="https://github.com/Heiwabitnull/rxb-core-binaries/raw/main/RXBforWin/rxb-0.1.0-win64-setup.exe.asc" target="_blank" rel="noopener noreferrer">
-                    📄 Windows signature (.asc)
+                    Windows signature (.asc)
                 </a>
                 <a href="https://github.com/Heiwabitnull/rxb-core-binaries/releases/download/v0.1.0/rxb-0.1.0-linux64.tar.gz.asc" target="_blank" rel="noopener noreferrer">
-                    📄 Linux signature (.asc)
+                    Linux signature (.asc)
                 </a>
             </div>
             <p style="font-size: 0.75rem; margin-top: 1rem; opacity: 0.7;">Verify integrity with GPG — signatures for both binaries</p>
@@ -1029,7 +1043,6 @@ Be good and do good.
             document.getElementById('genesis-text').innerHTML = t.genesis;
         }
 
-        // Ustawienie języka domyślnego
         changeLanguage('en');
     </script>
 </body>
