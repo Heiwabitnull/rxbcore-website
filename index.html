@@ -7,12 +7,15 @@
     <title>RXB · Record X‑core Blockchain</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
+        /* ===== KOLORYSTYKA: WZÓR JASNY (HELLELFENBEIN / ZIELEŃ) ===== */
         :root {
-            --bg: #030712;
-            --text: #e2e8f0;
-            --green: #10b981;
-            --accent: #111827;
-            --border: rgba(16, 185, 129, 0.2);
+            --bg: #e1d2b1;           /* jasny, elegancki krem */
+            --text: #1a1c23;         /* głęboki ciemny */
+            --green: #065f46;         /* ciemna zieleń – kontrast na jasnym tle */
+            --accent: #ffffff;
+            --border: rgba(6, 95, 70, 0.3);
+            --card-bg: rgba(255, 255, 255, 0.5);
+            --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.05);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -36,6 +39,7 @@
             top: 0;
             left: 0;
             z-index: -1;
+            opacity: 0.65;
         }
 
         .wrapper {
@@ -67,7 +71,7 @@
         .lang-selector {
             display: flex;
             gap: 0.3rem;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(0, 0, 0, 0.05);
             padding: 0.3rem;
             border-radius: 12px;
             border: 1px solid var(--border);
@@ -76,7 +80,7 @@
         .lang-btn {
             background: transparent;
             border: none;
-            color: #94a3b8;
+            color: #4b5563;
             font-family: 'Orbitron', sans-serif;
             font-size: 0.7rem;
             padding: 0.4rem 0.8rem;
@@ -88,18 +92,18 @@
 
         .lang-btn.active {
             background: var(--green);
-            color: var(--bg);
+            color: #fff;
         }
 
         .lang-btn:hover:not(.active) {
-            color: #fff;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(6, 95, 70, 0.1);
+            color: #000;
         }
 
         @keyframes logoPulse {
-            0% { filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.4)); }
-            50% { filter: drop-shadow(0 0 25px rgba(16, 185, 129, 0.8)); }
-            100% { filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.4)); }
+            0% { filter: drop-shadow(0 0 8px rgba(6, 95, 70, 0.2)); }
+            50% { filter: drop-shadow(0 0 20px rgba(6, 95, 70, 0.5)); }
+            100% { filter: drop-shadow(0 0 8px rgba(6, 95, 70, 0.2)); }
         }
 
         .main-logo {
@@ -122,7 +126,7 @@
         h1 {
             font-family: 'Orbitron', sans-serif;
             font-size: clamp(3.5rem, 12vw, 6rem);
-            color: #fff;
+            color: var(--text);
             text-align: center;
             margin-bottom: 1rem;
             letter-spacing: -2px;
@@ -133,7 +137,7 @@
             max-width: 750px;
             margin: 0 auto 2rem auto;
             font-size: 1.25rem;
-            color: #94a3b8;
+            color: #2d3a3a;
             text-align: center;
             animation-delay: 0.4s;
         }
@@ -144,7 +148,7 @@
             font-size: 1rem;
             margin-bottom: 4rem;
             font-weight: 600;
-            background: rgba(16, 185, 129, 0.1);
+            background: rgba(6, 95, 70, 0.1);
             display: table;
             margin-left: auto;
             margin-right: auto;
@@ -154,7 +158,7 @@
             animation-delay: 0.6s;
         }
 
-        .green-text { color: var(--green); }
+        .green-text { color: var(--green); font-weight: 700; }
 
         .button-row {
             display: flex;
@@ -169,41 +173,42 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 1.1rem 2rem;
-            background: rgba(16, 185, 129, 0.05);
-            color: #fff;
+            padding: 1rem 2rem;
+            background: var(--card-bg);
+            color: var(--text);
             font-family: 'Orbitron', sans-serif;
             font-size: 0.8rem;
             font-weight: 700;
             text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 2px;
-            border-radius: 8px;
+            border-radius: 12px;
             min-width: 260px;
             border: 2px solid var(--border);
             position: relative;
             overflow: hidden;
             transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+            backdrop-filter: blur(4px);
         }
 
         .btn::after {
             content: '';
             position: absolute;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(6, 95, 70, 0.2);
             width: 100px;
             height: 100px;
             border-radius: 50%;
             opacity: 0;
             transform: scale(0);
-            transition: all 0.5s;
+            transition: all 0.4s;
         }
 
         .btn:hover {
             background: var(--green);
             border-color: var(--green);
-            color: var(--bg);
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 15px 30px rgba(16, 185, 129, 0.4);
+            color: #fff;
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 15px 25px rgba(6, 95, 70, 0.25);
         }
 
         .btn:active::after {
@@ -214,14 +219,16 @@
 
         .genesis-card {
             margin: 5rem 0 3rem 0;
-            padding: 3.5rem 2rem;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 16px;
+            padding: 3rem 2rem;
+            background: var(--card-bg);
+            backdrop-filter: blur(8px);
+            border-radius: 28px;
             border: 1px solid var(--border);
             text-align: center;
             position: relative;
             overflow: hidden;
             animation-delay: 1s;
+            box-shadow: var(--shadow-sm);
         }
 
         .genesis-card::before {
@@ -231,61 +238,55 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(16, 185, 129, 0.05) 0%, transparent 60%);
+            background: radial-gradient(circle, rgba(6, 95, 70, 0.05) 0%, transparent 70%);
             pointer-events: none;
         }
 
         .genesis-card h2 {
             font-family: 'Orbitron', sans-serif;
-            color: #fff;
+            color: var(--text);
             font-size: 1.8rem;
             margin-bottom: 2rem;
             letter-spacing: 5px;
         }
 
-        .genesis-hash {
+        .genesis-hash, .genesis-txid {
             color: var(--green);
             font-family: 'Courier New', monospace;
-            font-size: 1.1rem;
-            background: rgba(16, 185, 129, 0.1);
-            padding: 0.6rem 1.2rem;
-            border-radius: 8px;
+            background: rgba(6, 95, 70, 0.08);
+            padding: 0.6rem 1rem;
+            border-radius: 14px;
             display: inline-block;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             border: 1px solid var(--border);
             word-break: break-all;
+            font-size: 0.9rem;
         }
 
         .genesis-txid {
-            color: var(--green);
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            background: rgba(16, 185, 129, 0.05);
-            padding: 0.4rem 0.8rem;
-            border-radius: 4px;
-            display: inline-block;
-            margin-bottom: 1.5rem;
-            word-break: break-all;
+            font-size: 0.85rem;
         }
 
         .whitepaper-container {
             margin: 4rem 0;
-            padding: 2.5rem;
-            background: rgba(0, 0, 0, 0.3);
-            color: #94a3b8;
-            border-radius: 12px;
-            max-height: 500px;
+            padding: 2rem 2rem;
+            background: var(--card-bg);
+            backdrop-filter: blur(8px);
+            color: #1e293b;
+            border-radius: 28px;
+            max-height: 560px;
             overflow-y: auto;
             font-family: 'Courier New', monospace;
             font-size: 0.9rem;
-            line-height: 1.8;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            line-height: 1.75;
+            border: 1px solid var(--border);
             animation-delay: 1.2s;
+            box-shadow: var(--shadow-sm);
         }
 
         .whitepaper-container::-webkit-scrollbar { width: 8px; }
-        .whitepaper-container::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.02); }
-        .whitepaper-container::-webkit-scrollbar-thumb { background: rgba(16, 185, 129, 0.2); border-radius: 4px; }
+        .whitepaper-container::-webkit-scrollbar-track { background: rgba(6, 95, 70, 0.05); border-radius: 10px; }
+        .whitepaper-container::-webkit-scrollbar-thumb { background: rgba(6, 95, 70, 0.4); border-radius: 10px; }
         .whitepaper-container::-webkit-scrollbar-thumb:hover { background: var(--green); }
 
         .whitepaper-container pre {
@@ -293,29 +294,31 @@
             word-wrap: break-word;
             font-family: inherit;
             margin: 0;
-            font-size: 1rem;
-            font-weight: 700;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #1e293b;
         }
 
         .tor-notice {
             text-align: center;
-            background: rgba(16, 185, 129, 0.15);
+            background: rgba(6, 95, 70, 0.1);
             border: 1px solid var(--green);
             border-radius: 40px;
             padding: 0.7rem 1.5rem;
             max-width: 85%;
             margin: 0 auto 2rem auto;
             font-size: 0.9rem;
-            font-weight: 500;
+            font-weight: 600;
             color: var(--green);
             backdrop-filter: blur(2px);
         }
 
         .gpg-signatures {
             margin: 2rem 0 3rem;
-            padding: 1.5rem;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 16px;
+            padding: 1.8rem;
+            background: var(--card-bg);
+            backdrop-filter: blur(8px);
+            border-radius: 28px;
             border: 1px solid var(--border);
             text-align: center;
         }
@@ -336,8 +339,8 @@
         }
 
         .gpg-signatures a {
-            color: #94a3b8;
-            background: rgba(16, 185, 129, 0.05);
+            color: var(--text);
+            background: rgba(6, 95, 70, 0.08);
             padding: 0.6rem 1.2rem;
             border-radius: 40px;
             text-decoration: none;
@@ -352,16 +355,16 @@
 
         .gpg-signatures a:hover {
             background: var(--green);
-            color: var(--bg);
+            color: white;
             border-color: var(--green);
         }
 
         footer {
             margin-top: 2rem;
-            padding: 4rem 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 4rem 0 2rem;
+            border-top: 1px solid var(--border);
             text-align: center;
-            color: #64748b;
+            color: #4b5563;
             font-size: 0.8rem;
             width: 100%;
         }
@@ -374,39 +377,40 @@
             transform: translateX(-50%);
             width: 90%;
             max-width: 450px;
-            background: #1f2937;
-            padding: 2rem;
-            border-radius: 16px;
+            background: #fffef7;
+            padding: 1.8rem;
+            border-radius: 28px;
             z-index: 10000;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 25px 35px -12px rgba(0, 0, 0, 0.2);
             border: 1px solid var(--border);
             text-align: center;
+            backdrop-filter: blur(12px);
         }
 
-        #cookieConsent p { margin-bottom: 1.5rem; }
+        #cookieConsent p { margin-bottom: 1.5rem; font-weight: 500; }
 
         #cookieConsent button {
             background: var(--green);
-            color: var(--bg);
+            color: white;
             width: 100%;
             border: none;
-            padding: 1rem;
-            border-radius: 8px;
+            padding: 0.9rem;
+            border-radius: 40px;
             font-family: 'Orbitron', sans-serif;
             font-weight: bold;
             cursor: pointer;
             transition: 0.2s;
         }
 
-        #cookieConsent button:hover { background: #fff; }
+        #cookieConsent button:hover { background: #044e3a; transform: scale(0.98); }
     </style>
 </head>
 <body>
     <div id="particles-js"></div>
 
     <div id="cookieConsent">
-        <p>This site uses essential cookies for proper functionality.</p>
-        <button onclick="acceptCookies()">Accept</button>
+        <p>🍪 This site uses essential cookies for proper functionality.</p>
+        <button onclick="acceptCookies()">Accept & Continue</button>
     </div>
 
     <div class="wrapper">
@@ -421,7 +425,7 @@
         </div>
 
         <div class="tor-notice animate-in">
-            RXB operates as a Tor Onion only network. Tor must be installed and configured to use RXB.
+            🔒 RXB operates as a Tor Onion only network. Tor must be installed and configured to use RXB.
         </div>
 
         <img src="https://raw.githubusercontent.com/Heiwabitnull/RXB_logo/main/RXBlogo.png" alt="RXB" class="main-logo animate-in">
@@ -432,7 +436,7 @@
         </div>
 
         <div class="mining-note animate-in" id="mining-note">
-            Run a full node and mine on your PC or laptop using RXB's built-in mining software.
+            ⛏️ Run a full node and mine on your PC or laptop using RXB's built-in mining software.
         </div>
 
         <div class="button-row animate-in">
@@ -441,18 +445,18 @@
         </div>
 
         <div class="button-row animate-in">
-            <a href="https://github.com/Heiwabitnull/rxb-core-binaries/raw/main/RXBforWin/rxb-0.1.0-win64-setup.exe" class="btn" download id="btn-win">DOWNLOAD RXB FOR WINDOWS</a>
-            <a href="https://github.com/Heiwabitnull/rxb-core-binaries/releases/download/v0.1.0/rxb-0.1.0-linux64.tar.gz" class="btn" download id="btn-linux">DOWNLOAD RXB TAR.GZ FOR LINUX</a>
+            <a href="https://github.com/Heiwabitnull/rxb-core-binaries/raw/main/RXBforWin/rxb-0.1.0-win64-setup.exe" class="btn" download id="btn-win">⬇️ DOWNLOAD RXB FOR WINDOWS</a>
+            <a href="https://github.com/Heiwabitnull/rxb-core-binaries/releases/download/v0.1.0/rxb-0.1.0-linux64.tar.gz" class="btn" download id="btn-linux">🐧 DOWNLOAD RXB TAR.GZ FOR LINUX</a>
         </div>
 
         <div class="genesis-card animate-in">
-            <h2>GENESIS</h2>
+            <h2>⚡ GENESIS ⚡</h2>
             <div class="genesis-hash">Block hash: 0000000014766203f48e47b0c76ac24c9c23a1c9aeacce12c4e3648194f68b50</div>
             <div class="genesis-txid">Transaction ID: 2f41a21f88d745bdeeff375226e5a8b676381157cdd8106459a1cf27a194bc10</div>
             <p id="genesis-text">
                 The Genesis Block reward was permanently sent to <span class="green-text">OP_RETURN</span>.
             </p>
-            <p style="margin-top: 1.5rem; font-size: 0.85rem; color: #64748b;">P2P port: 8327</p>
+            <p style="margin-top: 1.5rem; font-size: 0.85rem; color: #4b5563;">🌐 P2P port: 8327 | immutable proof-of-work</p>
         </div>
 
         <div class="whitepaper-container animate-in">
@@ -912,22 +916,22 @@ Be good and do good.
         </div>
 
         <div class="gpg-signatures animate-in">
-            <h3>GPG SIGNATURES</h3>
+            <h3>🔐 GPG SIGNATURES</h3>
             <div class="gpg-links">
                 <a href="https://github.com/Heiwabitnull/rxb-core-binaries/raw/main/RXBforWin/rxb-0.1.0-win64-setup.exe.asc" target="_blank" rel="noopener noreferrer">
-                    Windows signature (.asc)
+                    🪟 Windows signature (.asc)
                 </a>
                 <a href="https://github.com/Heiwabitnull/rxb-core-binaries/releases/download/v0.1.0/rxb-0.1.0-linux64.tar.gz.asc" target="_blank" rel="noopener noreferrer">
-                    Linux signature (.asc)
+                    🐧 Linux signature (.asc)
                 </a>
             </div>
-            <p style="font-size: 0.75rem; margin-top: 1rem; opacity: 0.7;">Verify integrity with GPG — signatures for both binaries</p>
+            <p style="font-size: 0.75rem; margin-top: 1rem; opacity: 0.75;">Verify integrity with GPG — signatures for both binaries</p>
         </div>
 
         <footer class="animate-in">
             <p>© 2026 <span class="green-text">RXB</span> – Record X‑core Blockchain</p>
-            <p style="margin-top: 10px; opacity: 0.5;">CREATED BY HEIWABIT | Be good and do good.</p>
-            <p style="margin-top: 15px;"><a href="/privacy.html" style="color: var(--green); opacity: 0.6; font-size: 0.75rem; text-decoration: none; letter-spacing: 1px;">PRIVACY POLICY</a></p>
+            <p style="margin-top: 10px; opacity: 0.65;">⚡ CREATED BY HEIWABIT | Be good and do good.</p>
+            <p style="margin-top: 15px;"><a href="/privacy.html" style="color: var(--green); opacity: 0.7; font-size: 0.75rem; text-decoration: none; letter-spacing: 1px;">📄 PRIVACY POLICY</a></p>
         </footer>
     </div>
 
@@ -935,114 +939,55 @@ Be good and do good.
     <script>
         particlesJS('particles-js', {
             particles: {
-                number: { value: 60, density: { enable: true, value_area: 1000 } },
-                color: { value: "#10b981" },
+                number: { value: 55, density: { enable: true, value_area: 1000 } },
+                color: { value: "#065f46" },
                 shape: { type: "circle" },
-                opacity: { value: 0.3, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } },
-                size: { value: 3, random: true, anim: { enable: false, speed: 40, size_min: 0.1, sync: false } },
-                line_linked: { enable: true, distance: 150, color: "#10b981", opacity: 0.2, width: 1 },
-                move: { enable: true, speed: 2, direction: "none", random: false, straight: false, out_mode: "out", bounce: false, attract: { enable: false, rotateX: 600, rotateY: 1200 } }
+                opacity: { value: 0.35, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } },
+                size: { value: 3, random: true, anim: { enable: false, speed: 40, size_min: 0.2, sync: false } },
+                line_linked: { enable: true, distance: 150, color: "#065f46", opacity: 0.25, width: 1.2 },
+                move: { enable: true, speed: 1.8, direction: "none", random: false, straight: false, out_mode: "out", bounce: false, attract: { enable: false, rotateX: 600, rotateY: 1200 } }
             },
             interactivity: {
                 detect_on: "canvas",
                 events: { onhover: { enable: true, mode: "grab" }, onclick: { enable: false }, resize: true },
-                modes: { grab: { distance: 200, line_linked: { opacity: 0.5 } } }
+                modes: { grab: { distance: 180, line_linked: { opacity: 0.55 } } }
             },
             retina_detect: true
         });
 
         function setCookie(name, value, days) {
             let expires = "";
-            if (days) {
-                const date = new Date();
-                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                expires = "; expires=" + date.toUTCString();
-            }
+            if (days) { const date = new Date(); date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000)); expires = "; expires=" + date.toUTCString(); }
             document.cookie = name + "=" + (value || "") + expires + "; path=/";
         }
-
         function getCookie(name) {
             const nameEQ = name + "=";
             const ca = document.cookie.split(';');
-            for(let i = 0; i < ca.length; i++) {
-                let c = ca[i];
-                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-            }
+            for(let i = 0; i < ca.length; i++) { let c = ca[i]; while (c.charAt(0) == ' ') c = c.substring(1, c.length); if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length); }
             return null;
         }
-
-        function acceptCookies() {
-            setCookie('cookieConsent', 'accepted', 365);
-            document.getElementById('cookieConsent').style.display = 'none';
-        }
-
-        window.onload = function() {
-            if (!getCookie('cookieConsent')) {
-                document.getElementById('cookieConsent').style.display = 'block';
-            }
-        };
+        function acceptCookies() { setCookie('cookieConsent', 'accepted', 365); document.getElementById('cookieConsent').style.display = 'none'; }
+        window.onload = function() { if (!getCookie('cookieConsent')) document.getElementById('cookieConsent').style.display = 'block'; };
 
         const translations = {
-            en: {
-                heroDesc: '<span class="green-text">Record X core Blockchain</span>: a value transfer and evidentiary archiving system. Built for sovereignty.',
-                miningNote: 'Run a full node and mine on your PC or laptop using RXB\'s built-in mining software.',
-                btnSource: 'SOURCE CODE',
-                btnWhitepaper: 'WHITE PAPER',
-                btnWin: 'DOWNLOAD RXB FOR WINDOWS',
-                btnLinux: 'DOWNLOAD RXB TAR.GZ FOR LINUX',
-                genesis: 'The Genesis Block reward was permanently sent to <span class="green-text">OP_RETURN</span>.'
-            },
-            pl: {
-                heroDesc: '<span class="green-text">Record X core Blockchain</span>: system transferu wartości i archiwizacji dowodowej. Stworzony dla suwerenności.',
-                miningNote: 'Uruchom pełny węzeł i kop na swoim PC lub laptopie używając wbudowanego oprogramowania górniczego RXB.',
-                btnSource: 'KOD ŹRÓDŁOWY',
-                btnWhitepaper: 'BIAŁA KSIĘGA',
-                btnWin: 'POBIERZ RXB DLA WINDOWS',
-                btnLinux: 'POBIERZ RXB TAR.GZ DLA LINUX',
-                genesis: 'Nagroda Bloku Genezis została trwale przekazana do <span class="green-text">OP_RETURN</span>.'
-            },
-            de: {
-                heroDesc: '<span class="green-text">Record X core Blockchain</span>: ein System für Wertübertragung und Beweisarchivierung. Entwickelt für Souveränität.',
-                miningNote: 'Betreiben Sie einen vollständigen Knoten und minen Sie auf Ihrem PC oder Laptop mit der integrierten Mining-Software von RXB.',
-                btnSource: 'QUELLCODE',
-                btnWhitepaper: 'WHITEPAPER',
-                btnWin: 'RXB FÜR WINDOWS HERUNTERLADEN',
-                btnLinux: 'RXB TAR.GZ FÜR LINUX HERUNTERLADEN',
-                genesis: 'Die Belohnung des Genesis-Blocks wurde dauerhaft an <span class="green-text">OP_RETURN</span> gesendet.'
-            },
-            fr: {
-                heroDesc: '<span class="green-text">Record X core Blockchain</span> : un système de transfert de valeur et d’archivage probant. Conçu pour la souveraineté.',
-                miningNote: 'Exécutez un nœud complet et minez sur votre PC ou ordinateur portable en utilisant le logiciel de minage intégré de RXB.',
-                btnSource: 'CODE SOURCE',
-                btnWhitepaper: 'LIVRE BLANC',
-                btnWin: 'TÉLÉCHARGER RXB POUR WINDOWS',
-                btnLinux: 'TÉLÉCHARGER RXB TAR.GZ POUR LINUX',
-                genesis: 'La récompense du bloc Genesis a été définitivement envoyée à <span class="green-text">OP_RETURN</span>.'
-            }
+            en: { heroDesc: '<span class="green-text">Record X core Blockchain</span>: a value transfer and evidentiary archiving system. Built for sovereignty.', miningNote: '⛏️ Run a full node and mine on your PC or laptop using RXB\'s built-in mining software.', btnSource: 'SOURCE CODE', btnWhitepaper: 'WHITE PAPER', btnWin: '⬇️ DOWNLOAD RXB FOR WINDOWS', btnLinux: '🐧 DOWNLOAD RXB TAR.GZ FOR LINUX', genesis: 'The Genesis Block reward was permanently sent to <span class="green-text">OP_RETURN</span>.' },
+            pl: { heroDesc: '<span class="green-text">Record X core Blockchain</span>: system transferu wartości i archiwizacji dowodowej. Stworzony dla suwerenności.', miningNote: '⛏️ Uruchom pełny węzeł i kop na swoim PC lub laptopie używając wbudowanego oprogramowania.', btnSource: 'KOD ŹRÓDŁOWY', btnWhitepaper: 'BIAŁA KSIĘGA', btnWin: '⬇️ POBIERZ RXB DLA WINDOWS', btnLinux: '🐧 POBIERZ RXB TAR.GZ DLA LINUX', genesis: 'Nagroda Bloku Genezis została trwale przekazana do <span class="green-text">OP_RETURN</span>.' },
+            de: { heroDesc: '<span class="green-text">Record X core Blockchain</span>: ein System für Wertübertragung und Beweisarchivierung. Für Souveränität.', miningNote: '⛏️ Betreiben Sie einen vollständigen Knoten und minen Sie mit der integrierten Software.', btnSource: 'QUELLCODE', btnWhitepaper: 'WHITEPAPER', btnWin: '⬇️ RXB FÜR WINDOWS', btnLinux: '🐧 RXB TAR.GZ FÜR LINUX', genesis: 'Die Belohnung des Genesis-Blocks wurde dauerhaft an <span class="green-text">OP_RETURN</span> gesendet.' },
+            fr: { heroDesc: '<span class="green-text">Record X core Blockchain</span> : transfert de valeur et archivage probant. Souveraineté.', miningNote: '⛏️ Exécutez un nœud complet et minez sur PC avec le logiciel intégré.', btnSource: 'CODE SOURCE', btnWhitepaper: 'LIVRE BLANC', btnWin: '⬇️ TÉLÉCHARGER RXB WINDOWS', btnLinux: '🐧 TÉLÉCHARGER RXB LINUX', genesis: 'La récompense du bloc Genesis a été envoyée à <span class="green-text">OP_RETURN</span>.' }
         };
-
         let currentLang = 'en';
-
         function changeLanguage(lang) {
             currentLang = lang;
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.innerText.trim().toLowerCase() === lang) {
-                    btn.classList.add('active');
-                }
-            });
-
+            document.querySelectorAll('.lang-btn').forEach(btn => { btn.classList.remove('active'); if (btn.innerText.trim().toLowerCase() === lang) btn.classList.add('active'); });
             const t = translations[lang];
             document.getElementById('hero-description').innerHTML = t.heroDesc;
             document.getElementById('mining-note').innerHTML = t.miningNote;
             document.getElementById('btn-source').innerText = t.btnSource;
             document.getElementById('btn-whitepaper').innerText = t.btnWhitepaper;
-            document.getElementById('btn-win').innerText = t.btnWin;
-            document.getElementById('btn-linux').innerText = t.btnLinux;
+            document.getElementById('btn-win').innerHTML = t.btnWin;
+            document.getElementById('btn-linux').innerHTML = t.btnLinux;
             document.getElementById('genesis-text').innerHTML = t.genesis;
         }
-
         changeLanguage('en');
     </script>
 </body>
