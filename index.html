@@ -7,15 +7,17 @@
     <title>RXB · Record X‑core Blockchain</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        /* ===== KOLORYSTYKA: WZÓR JASNY (HELLELFENBEIN / ZIELEŃ) ===== */
+        /* ===== KOLORYSTYKA: KREM, ZIELEŃ, ZŁOTO (BEZ CZERWIENI) ===== */
         :root {
-            --bg: #e1d2b1;           /* jasny, elegancki krem */
-            --text: #1a1c23;         /* głęboki ciemny */
-            --green: #065f46;         /* ciemna zieleń – kontrast na jasnym tle */
-            --accent: #ffffff;
-            --border: rgba(6, 95, 70, 0.3);
-            --card-bg: rgba(255, 255, 255, 0.5);
-            --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.05);
+            --bg: #f4f1ea;
+            --text: #2d3436;
+            --rxb-green: #2ecc71;
+            --rxb-dark-green: #27ae60;
+            --rxb-gold: #f1c40f;
+            --rxb-silver: #dfe6e9;
+            --border: rgba(46, 204, 113, 0.3);
+            --card-bg: rgba(255, 255, 255, 0.8);
+            --shadow: 0 10px 30px rgba(46, 204, 113, 0.1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -23,6 +25,7 @@
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg);
+            background-image: radial-gradient(circle at top right, rgba(241, 196, 15, 0.08), transparent);
             color: var(--text);
             line-height: 1.6;
             min-height: 100vh;
@@ -32,14 +35,15 @@
             overflow-x: hidden;
         }
 
-        #particles-js {
+        /* Canvas tła z literami RXB */
+        #rxb-canvas {
             position: fixed;
-            width: 100%;
-            height: 100%;
             top: 0;
             left: 0;
+            width: 100%;
+            height: 100%;
             z-index: -1;
-            opacity: 0.65;
+            display: block;
         }
 
         .wrapper {
@@ -61,63 +65,56 @@
 
         .brand {
             font-family: 'Orbitron', sans-serif;
+            color: var(--rxb-dark-green);
+            font-weight: 700;
+            letter-spacing: 1px;
+            border-left: 6px solid var(--rxb-gold);
+            padding-left: 15px;
             font-size: 1rem;
-            letter-spacing: 2px;
-            color: var(--green);
             text-transform: uppercase;
-            font-weight: 700;
-        }
-
-        .lang-selector {
-            display: flex;
-            gap: 0.3rem;
-            background: rgba(0, 0, 0, 0.05);
-            padding: 0.3rem;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-        }
-
-        .lang-btn {
-            background: transparent;
-            border: none;
-            color: #4b5563;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.7rem;
-            padding: 0.4rem 0.8rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: 0.2s;
-            font-weight: 700;
-        }
-
-        .lang-btn.active {
-            background: var(--green);
-            color: #fff;
-        }
-
-        .lang-btn:hover:not(.active) {
-            background: rgba(6, 95, 70, 0.1);
-            color: #000;
         }
 
         @keyframes logoPulse {
-            0% { filter: drop-shadow(0 0 8px rgba(6, 95, 70, 0.2)); }
-            50% { filter: drop-shadow(0 0 20px rgba(6, 95, 70, 0.5)); }
-            100% { filter: drop-shadow(0 0 8px rgba(6, 95, 70, 0.2)); }
+            0% { filter: drop-shadow(0 0 5px rgba(46, 204, 113, 0.3)); transform: scale(1); }
+            50% { filter: drop-shadow(0 0 20px rgba(46, 204, 113, 0.6)); transform: scale(1.05); }
+            100% { filter: drop-shadow(0 0 5px rgba(46, 204, 113, 0.3)); transform: scale(1); }
         }
 
         .main-logo {
             display: block;
-            width: 140px;
-            margin: 0 auto 2.5rem auto;
-            animation: logoPulse 3s infinite ease-in-out;
+            width: 160px;
+            margin: 0 auto 2rem;
+            animation: logoPulse 4s infinite ease-in-out;
+        }
+
+        /* Sekcja informacji technicznych - czarny tekst, pełne nazwy */
+        .tech-specs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem auto 2rem;
+            max-width: 900px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(4px);
+            padding: 1.2rem 2rem;
+            border-radius: 50px;
+            border: 1px solid var(--rxb-gold);
+            font-family: 'Orbitron', monospace;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #000000; /* czarny */
+        }
+        .tech-specs div {
+            white-space: nowrap;
+            letter-spacing: 0.5px;
         }
 
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
         .animate-in {
             opacity: 0;
             animation: fadeInUp 1s ease-out forwards;
@@ -125,48 +122,44 @@
 
         h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: clamp(3.5rem, 12vw, 6rem);
-            color: var(--text);
+            font-size: clamp(4rem, 15vw, 7rem);
             text-align: center;
-            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--rxb-dark-green), var(--rxb-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
             letter-spacing: -2px;
-            animation-delay: 0.2s;
         }
 
         .hero-description {
             max-width: 750px;
             margin: 0 auto 2rem auto;
-            font-size: 1.25rem;
-            color: #2d3a3a;
+            font-size: 1.4rem;
+            font-weight: 600;
             text-align: center;
-            animation-delay: 0.4s;
+            color: #000000; /* czarny */
         }
 
         .mining-note {
             text-align: center;
-            color: var(--green);
-            font-size: 1rem;
-            margin-bottom: 4rem;
-            font-weight: 600;
-            background: rgba(6, 95, 70, 0.1);
+            background: rgba(46, 204, 113, 0.1);
             display: table;
             margin-left: auto;
             margin-right: auto;
             padding: 0.6rem 2rem;
             border-radius: 50px;
             border: 1px solid var(--border);
-            animation-delay: 0.6s;
+            font-weight: 600;
+            color: var(--rxb-dark-green);
+            margin-bottom: 2rem;
         }
-
-        .green-text { color: var(--green); font-weight: 700; }
 
         .button-row {
             display: flex;
             flex-wrap: wrap;
-            gap: 1.2rem;
+            gap: 1.5rem;
             justify-content: center;
-            margin: 1.2rem 0;
-            animation-delay: 0.8s;
+            margin: 2rem 0;
         }
 
         .btn {
@@ -174,173 +167,236 @@
             align-items: center;
             justify-content: center;
             padding: 1rem 2rem;
-            background: var(--card-bg);
-            color: var(--text);
+            background: white;
+            color: var(--rxb-dark-green);
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.8rem;
             font-weight: 700;
             text-decoration: none;
+            border-radius: 12px;
+            min-width: 280px;
+            border: 2px solid var(--rxb-green);
+            transition: 0.3s;
+            box-shadow: 4px 4px 0px var(--rxb-green);
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            border-radius: 12px;
-            min-width: 260px;
-            border: 2px solid var(--border);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-            backdrop-filter: blur(4px);
-        }
-
-        .btn::after {
-            content: '';
-            position: absolute;
-            background: rgba(6, 95, 70, 0.2);
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            opacity: 0;
-            transform: scale(0);
-            transition: all 0.4s;
         }
 
         .btn:hover {
-            background: var(--green);
-            border-color: var(--green);
-            color: #fff;
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 15px 25px rgba(6, 95, 70, 0.25);
+            background: var(--rxb-green);
+            color: white;
+            transform: translate(2px, 2px);
+            box-shadow: 0px 0px 0px var(--rxb-green);
         }
 
-        .btn:active::after {
-            opacity: 1;
-            transform: scale(3);
-            transition: 0s;
-        }
-
-        .genesis-card {
-            margin: 5rem 0 3rem 0;
-            padding: 3rem 2rem;
-            background: var(--card-bg);
-            backdrop-filter: blur(8px);
-            border-radius: 28px;
-            border: 1px solid var(--border);
+        .tor-notice {
             text-align: center;
-            position: relative;
-            overflow: hidden;
-            animation-delay: 1s;
-            box-shadow: var(--shadow-sm);
+            background: white;
+            border: 4px solid var(--rxb-gold);
+            border-radius: 15px;
+            padding: 1rem;
+            margin-bottom: 3rem;
+            color: var(--text);
+            font-weight: 600;
+            box-shadow: var(--shadow);
+        }
+        .tor-notice .coin-supply {
+            color: var(--rxb-dark-green);
+            display: block;
+            font-size: 1.1rem;
+            margin-top: 5px;
         }
 
-        .genesis-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(6, 95, 70, 0.05) 0%, transparent 70%);
-            pointer-events: none;
+        /* Genesis card – czarny, pogrubiony tekst */
+        .genesis-card {
+            margin: 4rem 0;
+            padding: 3rem;
+            background: white;
+            border-radius: 30px;
+            border: 1px solid var(--rxb-silver);
+            border-top: 6px solid var(--rxb-gold);
+            text-align: center;
+            box-shadow: var(--shadow);
         }
-
         .genesis-card h2 {
             font-family: 'Orbitron', sans-serif;
-            color: var(--text);
-            font-size: 1.8rem;
+            letter-spacing: 3px;
+            color: var(--rxb-gold);
             margin-bottom: 2rem;
-            letter-spacing: 5px;
         }
-
         .genesis-hash, .genesis-txid {
-            color: var(--green);
             font-family: 'Courier New', monospace;
-            background: rgba(6, 95, 70, 0.08);
-            padding: 0.6rem 1rem;
-            border-radius: 14px;
-            display: inline-block;
-            margin-bottom: 1rem;
-            border: 1px solid var(--border);
-            word-break: break-all;
+            background: var(--rxb-silver);
+            padding: 10px;
+            border-radius: 10px;
             font-size: 0.9rem;
+            font-weight: 700;
+            display: inline-block;
+            margin: 15px 0;
+            color: #000000; /* czarny */
+            word-break: break-all;
         }
-
         .genesis-txid {
             font-size: 0.85rem;
         }
-
-        .whitepaper-container {
-            margin: 4rem 0;
-            padding: 2rem 2rem;
-            background: var(--card-bg);
-            backdrop-filter: blur(8px);
-            color: #1e293b;
-            border-radius: 28px;
-            max-height: 560px;
-            overflow-y: auto;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            line-height: 1.75;
-            border: 1px solid var(--border);
-            animation-delay: 1.2s;
-            box-shadow: var(--shadow-sm);
+        .genesis-card p {
+            font-weight: 700;
+            color: #000000;
+        }
+        .genesis-card .green-text {
+            color: #000000; /* czarny zamiast zielonego */
+            font-weight: 700;
+        }
+        .genesis-card .p2p-note {
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            color: #000000;
+            font-weight: 700;
         }
 
-        .whitepaper-container::-webkit-scrollbar { width: 8px; }
-        .whitepaper-container::-webkit-scrollbar-track { background: rgba(6, 95, 70, 0.05); border-radius: 10px; }
-        .whitepaper-container::-webkit-scrollbar-thumb { background: rgba(6, 95, 70, 0.4); border-radius: 10px; }
-        .whitepaper-container::-webkit-scrollbar-thumb:hover { background: var(--green); }
-
+        /* Kontener białej księgi */
+        .whitepaper-container {
+            background-image: linear-gradient(rgba(255,255,255,0.88), rgba(255,255,255,0.88)), url('paintgold.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: local;
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid var(--rxb-silver);
+            max-height: 500px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            font-weight: 600;
+            line-height: 1.75;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.05), var(--shadow);
+            margin: 4rem 0;
+        }
         .whitepaper-container pre {
             white-space: pre-wrap;
             word-wrap: break-word;
             font-family: inherit;
             margin: 0;
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: #1e293b;
-        }
-
-        .tor-notice {
-            text-align: center;
-            background: rgba(6, 95, 70, 0.1);
-            border: 1px solid var(--green);
-            border-radius: 40px;
-            padding: 0.7rem 1.5rem;
-            max-width: 85%;
-            margin: 0 auto 2rem auto;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 600;
-            color: var(--green);
-            backdrop-filter: blur(2px);
+            color: var(--text);
+        }
+        .whitepaper-container::-webkit-scrollbar { width: 8px; }
+        .whitepaper-container::-webkit-scrollbar-track { background: var(--rxb-silver); border-radius: 10px; }
+        .whitepaper-container::-webkit-scrollbar-thumb { background: var(--rxb-green); border-radius: 10px; }
+
+        /* Sekcja przewodnika */
+        .setup-guide {
+            margin: 4rem 0;
+            background: white;
+            border-radius: 28px;
+            border: 1px solid var(--rxb-silver);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+        .setup-header {
+            background: var(--rxb-dark-green);
+            padding: 1.5rem;
+            text-align: center;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+        }
+        .setup-header h3 {
+            font-size: 1.6rem;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+        .setup-header p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        .setup-content {
+            padding: 2rem;
+            max-height: 600px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            background: #fefef7;
+        }
+        .setup-content pre {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 1rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-size: 0.8rem;
+        }
+        .setup-content h4 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--rxb-dark-green);
+            margin: 1.5rem 0 0.5rem;
+        }
+        .setup-content .download-btn {
+            display: inline-block;
+            background: var(--rxb-green);
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            margin: 1rem 0;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .setup-content .download-btn:hover {
+            background: var(--rxb-dark-green);
+            transform: scale(1.02);
+        }
+        .bitcointalk-link {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .bitcointalk-link a {
+            display: inline-block;
+            background: var(--rxb-gold);
+            color: #2d3436;
+            padding: 0.8rem 2rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            transition: 0.2s;
+            border: 1px solid var(--rxb-dark-green);
+        }
+        .bitcointalk-link a:hover {
+            background: var(--rxb-dark-green);
+            color: white;
         }
 
         .gpg-signatures {
             margin: 2rem 0 3rem;
             padding: 1.8rem;
-            background: var(--card-bg);
-            backdrop-filter: blur(8px);
+            background: white;
             border-radius: 28px;
-            border: 1px solid var(--border);
+            border: 1px solid var(--rxb-silver);
             text-align: center;
+            box-shadow: var(--shadow);
         }
-
         .gpg-signatures h3 {
             font-family: 'Orbitron', sans-serif;
             font-size: 1.2rem;
             letter-spacing: 2px;
-            color: var(--green);
+            color: var(--rxb-dark-green);
             margin-bottom: 1rem;
         }
-
         .gpg-signatures .gpg-links {
             display: flex;
             flex-wrap: wrap;
             gap: 1.2rem;
             justify-content: center;
         }
-
         .gpg-signatures a {
             color: var(--text);
-            background: rgba(6, 95, 70, 0.08);
+            background: rgba(46, 204, 113, 0.1);
             padding: 0.6rem 1.2rem;
             border-radius: 40px;
             text-decoration: none;
@@ -352,21 +408,56 @@
             align-items: center;
             gap: 6px;
         }
-
         .gpg-signatures a:hover {
-            background: var(--green);
+            background: var(--rxb-green);
             color: white;
-            border-color: var(--green);
+            border-color: var(--rxb-green);
+        }
+
+        .lang-selector {
+            display: flex;
+            gap: 0.3rem;
+            background: rgba(255, 255, 255, 0.6);
+            padding: 0.3rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: var(--text);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-weight: 700;
+        }
+        .lang-btn.active {
+            background: var(--rxb-green);
+            color: white;
+        }
+        .lang-btn:hover:not(.active) {
+            background: rgba(46, 204, 113, 0.2);
+            color: #000;
         }
 
         footer {
             margin-top: 2rem;
-            padding: 4rem 0 2rem;
-            border-top: 1px solid var(--border);
+            padding: 3rem 0 2rem;
             text-align: center;
-            color: #4b5563;
             font-size: 0.8rem;
+            color: #95a5a6;
+            border-top: 1px solid var(--rxb-silver);
             width: 100%;
+        }
+        footer .green-text {
+            color: var(--rxb-dark-green);
+        }
+        footer a {
+            color: var(--rxb-dark-green);
+            text-decoration: none;
         }
 
         #cookieConsent {
@@ -377,20 +468,17 @@
             transform: translateX(-50%);
             width: 90%;
             max-width: 450px;
-            background: #fffef7;
+            background: white;
             padding: 1.8rem;
             border-radius: 28px;
             z-index: 10000;
             box-shadow: 0 25px 35px -12px rgba(0, 0, 0, 0.2);
-            border: 1px solid var(--border);
+            border: 2px solid var(--rxb-green);
             text-align: center;
-            backdrop-filter: blur(12px);
         }
-
         #cookieConsent p { margin-bottom: 1.5rem; font-weight: 500; }
-
         #cookieConsent button {
-            background: var(--green);
+            background: var(--rxb-green);
             color: white;
             width: 100%;
             border: none;
@@ -401,15 +489,14 @@
             cursor: pointer;
             transition: 0.2s;
         }
-
-        #cookieConsent button:hover { background: #044e3a; transform: scale(0.98); }
+        #cookieConsent button:hover { background: var(--rxb-dark-green); transform: scale(0.98); }
     </style>
 </head>
 <body>
-    <div id="particles-js"></div>
+    <canvas id="rxb-canvas"></canvas>
 
     <div id="cookieConsent">
-        <p>  This website uses only essential cookies to function properly.</p>
+        <p>This website uses only essential cookies to function properly.</p>
         <button onclick="acceptCookies()">Accept & Continue</button>
     </div>
 
@@ -417,23 +504,33 @@
         <div class="header-bar animate-in">
             <div class="brand">RXB · Record X‑core Blockchain</div>
             <div class="lang-selector">
-                <button class="lang-btn active" onclick="changeLanguage('en')">EN</button>
-                <button class="lang-btn" onclick="changeLanguage('pl')">PL</button>
-                <button class="lang-btn" onclick="changeLanguage('de')">DE</button>
-                <button class="lang-btn" onclick="changeLanguage('fr')">FR</button>
+                <button class="lang-btn active" data-lang="en" onclick="changeLanguage('en')">EN</button>
+                <button class="lang-btn" data-lang="pl" onclick="changeLanguage('pl')">PL</button>
+                <button class="lang-btn" data-lang="de" onclick="changeLanguage('de')">DE</button>
+                <button class="lang-btn" data-lang="fr" onclick="changeLanguage('fr')">FR</button>
             </div>
         </div>
 
+        <!-- tor-notice bez przecinka -->
         <div class="tor-notice animate-in">
-    <p>Record X-core Blockchain uses seed onion. Tor must be installed and configured to use RXB.</p>
-    <div class="coin-supply">Only 39 million coins can be mined</div>
-</div>
+            <p>RXB blockchain has now bridges for easy start just install & run node to enjoy mining on your PC or use Tor onion seed for better privacy.</p>
+            <div class="coin-supply">Only 39 million coins can be mined</div>
+        </div>
 
         <img src="https://raw.githubusercontent.com/Heiwabitnull/RXB_logo/main/RXBlogo.png" alt="RXB" class="main-logo animate-in">
 
         <h1 class="animate-in">RXB</h1>
         <div class="hero-description animate-in" id="hero-description">
-            <span class="green-text">Record X core Blockchain</span>: Value transfer and evidentiary archiving system. Built for sovereignty.
+            Record X core Blockchain: Value transfer and evidentiary archiving system. Built for sovereignty.
+        </div>
+
+        <!-- Tech specs – pełne nazwy, czarny tekst -->
+        <div class="tech-specs animate-in">
+            <div>Port 8327</div>
+            <div>Algorithm SHA-256 PoW</div>
+            <div>Difficulty LWMA adaptive</div>
+            <div>Halving 195000 blocks</div>
+            <div>Maturity 50 blocks</div>
         </div>
 
         <div class="mining-note animate-in" id="mining-note">
@@ -446,20 +543,22 @@
         </div>
 
         <div class="button-row animate-in">
-            <a href="https://github.com/Heiwabitnull/rxb-core-binaries/raw/main/RXBforWin/rxb-0.1.0-win64-setup.exe" class="btn" download id="btn-win">⬇️ DOWNLOAD RXB FOR WINDOWS</a>
-            <a href="https://github.com/Heiwabitnull/rxb-core-binaries/raw/main/RXBforLinux/rxb-0.1.0-linux64.tar.gz" class="btn" download id="btn-linux">🐧 DOWNLOAD RXB TAR.GZ FOR LINUX</a>
+            <a href="https://github.com/Heiwabitnull/rxb-core-binaries/raw/main/RXBforWin/rxb-0.1.0-win64-setup.exe" class="btn" download id="btn-win">DOWNLOAD RXB FOR WINDOWS</a>
+            <a href="https://github.com/Heiwabitnull/rxb-core-binaries/raw/main/RXBforLinux/rxb-0.1.0-linux64.tar.gz" class="btn" download id="btn-linux">DOWNLOAD RXB TAR.GZ FOR LINUX</a>
         </div>
 
+        <!-- Genesis card – pogrubiony i czarny tekst -->
         <div class="genesis-card animate-in">
-            <h2>⚡ GENESIS ⚡</h2>
+            <h2>GENESIS</h2>
             <div class="genesis-hash">Block hash: 0000000014766203f48e47b0c76ac24c9c23a1c9aeacce12c4e3648194f68b50</div>
             <div class="genesis-txid">Transaction ID: 2f41a21f88d745bdeeff375226e5a8b676381157cdd8106459a1cf27a194bc10</div>
             <p id="genesis-text">
-                The Genesis Block reward was permanently sent to <span class="green-text">OP_RETURN</span>.
+                The Genesis Block reward was permanently sent to OP_RETURN.
             </p>
-            <p style="margin-top: 1.5rem; font-size: 0.85rem; color: #4b5563;">🌐 P2P port: 8327 | immutable proof-of-work</p>
+            <p class="p2p-note">P2P port: 8327 | immutable proof-of-work</p>
         </div>
 
+        <!-- Biała księga (bez zmian) -->
         <div class="whitepaper-container animate-in">
             <pre>
 White Paper
@@ -916,46 +1015,490 @@ Be good and do good.
             </pre>
         </div>
 
+        <!-- Nowa sekcja: przewodnik konfiguracji węzła -->
+        <div class="setup-guide animate-in">
+            <div class="setup-header">
+                <h3>RXB : Record X-core Blockchain</h3>
+                <p>Complete RXB Node Setup Guide</p>
+            </div>
+            <div class="setup-content">
+                <h4>PART 1. INSTALL TOR</h4>
+                <pre>Ubuntu / Debian:
+
+    sudo apt update
+    sudo apt install tor -y
+
+Start Tor service:
+
+    sudo systemctl start tor@default
+    sudo systemctl enable tor@default
+
+Check if Tor is running:
+
+    sudo systemctl status tor@default
+
+You should see "Active: active (running)" and "Bootstrapped 100% (done)".
+Then wait for 100% before starting your RXB node.</pre>
+
+                <h4>PART 2. FIREWALL</h4>
+                <pre>If you use UFW firewall commands to open port 8327 for RXB P2P:
+
+    sudo ufw allow 8327/tcp
+    sudo ufw allow ssh
+    sudo ufw enable
+    sudo ufw status
+
+On Windows please check your firewall settings and allow rxbd.exe and rxb-qt.exe
+through Windows Defender Firewall for both private and public networks.
+Port 8327 TCP must be open for incoming connections.</pre>
+
+                <h4>PART 3. DOWNLOAD RXB</h4>
+                <pre>Download the latest binaries or source code.
+
+    Binaries:    https://github.com/Heiwabitnull/rxb-core-binaries
+    Source code: https://github.com/Heiwabitnull/rxb-core
+    Website:     https://rxbcore.org
+
+For Linux extract the archive.
+
+tar -xzf rxb-0.1.0-linux64.tar.gz
+cd rxb-0.1.0-linux64</pre>
+
+                <h4>PART 4. CREATE NODE CONFIGURATION FILE</h4>
+                <pre>Create RXB data directory.
+
+    mkdir -p ~/.rxb
+
+Create the configuration file.
+
+    nano ~/.rxb/rxb.conf
+
+Paste the following configuration for a node running through Tor (recommended):
+
+# RXB Node Configuration for Tor onion mode
+
+daemon=1
+listen=1
+server=1
+port=8327
+maxconnections=40
+
+# Tor
+onlynet=onion
+proxy=127.0.0.1:9050
+listenonion=1
+torcontrol=127.0.0.1:9051
+
+# Seed nodes
+addnode=5v2v5vq2jz6hjwzblnfvqr6rizbxllyst3wkcnfz7np2lskjsmrl2tqd.onion:8327
+addnode=ig32f2l3xphumkptinc5j5ic4kj6mdyhobcfctcbkpfg4rhiuvbojmid.onion:8327
+addnode=74zt3nxpo4sjjix47crkasbjk3gbsngrcqe4wi3q55aytjhns3ajyqqd.onion:8327
+
+# RPC
+rpcuser=yourusername
+rpcpassword=yourpassword
+rpcallowip=127.0.0.1
+rpcport=8328
+
+# Wallet
+disablewallet=0
+
+# Daemon
+daemon=1
+
+But If you want your node to also act as a bridge node
+connecting both clearnet and Tor users then use this basic configuration.
+
+# RXB Node Configuration - Bridge mode
+daemon=1
+listen=1
+server=1
+port=8327
+maxconnections= 30 or more or less its up to you.
+
+# Tor
+proxy=127.0.0.1:9050
+onion=127.0.0.1:9050
+listenonion=1
+torcontrol=127.0.0.1:9051
+
+# Your public IP (replace with your actual IP)
+externalip=YOUR.PUBLIC.IP.HERE
+
+# Seed nodes
+addnode=5v2v5vq2jz6hjwzblnfvqr6rizbxllyst3wkcnfz7np2lskjsmrl2tqd.onion:8327
+addnode=ig32f2l3xphumkptinc5j5ic4kj6mdyhobcfctcbkpfg4rhiuvbojmid.onion:8327
+addnode=74zt3nxpo4sjjix47crkasbjk3gbsngrcqe4wi3q55aytjhns3ajyqqd.onion:8327
+
+# RPC
+rpcuser=yourusername
+rpcpassword=yourpassword
+rpcallowip=127.0.0.1
+rpcport=8328
+
+# Wallet
+disablewallet=0
+
+# Daemon
+daemon=1
+
+Then save that file: Ctrl+X then Y then Enter</pre>
+
+                <h4>PART WINDOWS SETUP</h4>
+                <pre>Download and install the RXB installer for Windows.
+
+https://rxbcore.org
+
+Run rxb-0.1.0-win64-setup.exe and follow the installation.
+
+INSTALL TOR ON WINDOWS.
+
+Download Tor Expert Bundle (Not Tor Browser) from
+
+    https://www.torproject.org/download/tor/
+
+Extract the archive and run tor.exe from the folder.
+Or install it as a Windows service by running in Command Prompt as Administrator:
+
+    tor.exe --service install
+    tor.exe --service start
+
+Check if Tor is running by opening Task Manager and looking for tor.exe process.
+
+WINDOWS FIREWALL - OPEN PORT 8327:
+
+Option 1 - Using Windows Defender Firewall (GUI).
+1. Press Windows key type "Windows Defender Firewall" and open it
+2. Click "Advanced settings" should be on the left
+3. Click "Inbound Rules" then "New Rule" on the right
+4. Select "Port" and click Next
+5. Select "TCP" and enter port 8327 then click Next
+6. Select "Allow the connection" then simply click Next
+7. Check all three boxes (Domain, Private, Public) and then click Next
+8. Name the rule "RXB P2P" and click Finish
+9. Repeat for "Outbound Rules"
+
+Option 2 - Using PowerShell as Administrator:
+
+   netsh advfirewall firewall add rule name="RXB P2P In" dir=in action=allow protocol=TCP localport=8327
+   netsh advfirewall firewall add rule name="RXB P2P Out" dir=out action=allow protocol=TCP localport=8327
+
+Also allow rxbd.exe and rxb-qt.exe through firewall if Windows asks.
+
+WINDOWS CONFIGURATION FILE.
+
+The RXB data folder on Windows is located at.
+
+    C:\Users\YourUsername\AppData\Roaming\RXB\
+
+Create a file called rxb.conf in that folder.
+You can open it with Notepad and paste basic onion or bridge configuration from Part 4.
+
+On Windows use rxb-qt.exe for the graphical wallet
+or open Command Prompt in the RXB installation folder and use:
+
+    rxbd.exe -daemon
+    rxb-cli.exe getblockcount
+    rxb-cli.exe getconnectioncount
+
+FIND YOUR PUBLIC IP ON WINDOWS (its needed for bridge mode).
+
+    Open Command Prompt and type.
+    curl ifconfig.me
+
+Or simply visit https://ifconfig.me in your browser.</pre>
+
+                <h4>PART 5. START YOUR RXB NODE</h4>
+                <pre>Start the node daemon:
+
+    ./rxbd -daemon
+
+Check how many blocks have been downloaded:
+
+  ./rxb-cli getblockcount
+
+Check connections.
+
+   ./rxb-cli getconnectioncount
+
+Check network info.
+
+  ./rxb-cli getnetworkinfo
+
+Wait until getblockcount stops increasing and matches the current block height.
+That means your node is fully synchronized.</pre>
+
+                <h4>PART 6. CREATE AND MANAGE WALLET</h4>
+                <pre>Create a new wallet.
+
+    ./rxb-cli createwallet "mywallet"
+
+Encrypt your wallet with a strong password:
+
+    ./rxb-cli encryptwallet "your_strong_password_here"
+
+If your node will restart after encryption then Start your RXB node again:
+
+    ./rxbd -daemon
+
+Unlock wallet for use (replace timeout in seconds, 600 = 10 minutes):
+
+    ./rxb-cli walletpassphrase "your_strong_password_here" 600
+
+Generate a classic legacy address:
+
+    ./rxb-cli getnewaddress "mylabel" legacy
+
+Generate a SegWit address (starts with rxb):
+
+    ./rxb-cli getnewaddress "mylabel" bech32
+
+List all your addresses:
+
+    ./rxb-cli listreceivedbyaddress 0 true
+
+Check your balance:
+
+    ./rxb-cli getbalance
+
+IMPORTANT.  Always keep a backup of your wallet file located at.
+    ~/.rxb/wallet.dat
+
+Store backups in multiple secure offline locations and Never share your wallet file or password with anyone.</pre>
+
+                <h4>PART 7. MINING</h4>
+                <pre>First generate a legacy address to receive mining rewards.
+
+    ./rxb-cli getnewaddress "mining" legacy
+
+This will return a legacy address starting with a number. Then use this address in the mining command below.
+
+Unlock your wallet before mining.
+
+    ./rxb-cli walletpassphrase "your_strong_password_here" 99999
+
+Start mining on 2 threads.
+
+    ./rxb-cli startmining "YOUR_LEGACY_ADDRESS_HERE" 2
+
+Start mining on 4 threads:
+
+    ./rxb-cli startmining "YOUR_LEGACY_ADDRESS_HERE" 4
+
+Check mining info.
+
+    ./rxb-cli getmininginfo
+
+Stop mining
+
+    ./rxb-cli stopmining
+
+Stop the node when needed:
+
+    ./rxb-cli stop
+
+Now the Best Part  FOR USERS WITHOUT TOR
+
+Bridge node has been added to RXB network. If you do not have Tor installed or configured you do not need to create
+any configuration file at all. Simply download the latest binaries and run Your RXB node.
+
+    ./rxbd -daemon
+
+On first launch the node will automatically connect to the bridge and synchronize without any Tor setup required.
+
+The bridge is included in all latest binaries and source code releases.
+
+Download buttons on https://rxbcore.org point directly to the latest versions.
+
+Using Tor with seed onion nodes is still recommended as it provides better privacy.
+The bridge is an extra option for users who prefer not to use Tor.
+
+Be good and do good.
+
+RXB - Record X-core Blockchain
+https://rxbcore.org
+Cheers</pre>
+                <a href="#" class="download-btn" onclick="downloadGuide()">Download Setup Guide (.txt)</a>
+            </div>
+        </div>
+
+        <!-- Link do Bitcointalk -->
+        <div class="bitcointalk-link animate-in">
+            <a href="https://bitcointalk.org/index.php?topic=5578560.msg66551820#msg66551820" target="_blank" rel="noopener noreferrer">Join RXB Discussion on Bitcointalk Forum</a>
+        </div>
+
         <div class="gpg-signatures animate-in">
-            <h3>  GPG SIGNATURES</h3>
+            <h3>GPG SIGNATURES</h3>
             <div class="gpg-links">
                 <a href="https://github.com/Heiwabitnull/rxb-core-binaries/raw/main/RXBforWin/rxb-0.1.0-win64-setup.exe.asc" target="_blank" rel="noopener noreferrer">
-                    🪟 Windows signature (.asc)
+                    Windows signature (.asc)
                 </a>
                 <a href="https://github.com/Heiwabitnull/rxb-core-binaries/raw/main/RXBforLinux/rxb-0.1.0-linux64.tar.gz.asc" target="_blank" rel="noopener noreferrer">
-                    🐧 Linux signature (.asc)
+                    Linux signature (.asc)
                 </a>
             </div>
-            <p style="font-size: 0.75rem; margin-top: 1rem; opacity: 0.75;">Verify integrity with GPG — signatures for both binaries</p>
+            <p style="font-size: 0.75rem; margin-top: 1rem; opacity: 0.75;">Verify integrity with GPG signatures for both binaries</p>
         </div>
 
         <footer class="animate-in">
             <p>© 2026 <span class="green-text">RXB</span> – Record X‑core Blockchain</p>
-            <p style="margin-top: 10px; opacity: 0.65;">  Created by heiwabitnull | Be good and do good.</p>
-            <p style="margin-top: 15px;"><a href="/privacy.html" style="color: var(--green); opacity: 0.7; font-size: 0.75rem; text-decoration: none; letter-spacing: 1px;">📄 PRIVACY POLICY</a></p>
+            <p style="margin-top: 10px; opacity: 0.65;">Created by heiwabitnull | Be good and do good.</p>
+            <p style="margin-top: 15px;"><a href="/privacy.html" style="color: var(--rxb-dark-green); opacity: 0.7; font-size: 0.75rem; text-decoration: none; letter-spacing: 1px;">PRIVACY POLICY</a></p>
         </footer>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        particlesJS('particles-js', {
-            particles: {
-                number: { value: 55, density: { enable: true, value_area: 1000 } },
-                color: { value: "#065f46" },
-                shape: { type: "circle" },
-                opacity: { value: 0.35, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } },
-                size: { value: 3, random: true, anim: { enable: false, speed: 40, size_min: 0.2, sync: false } },
-                line_linked: { enable: true, distance: 150, color: "#065f46", opacity: 0.25, width: 1.2 },
-                move: { enable: true, speed: 1.8, direction: "none", random: false, straight: false, out_mode: "out", bounce: false, attract: { enable: false, rotateX: 600, rotateY: 1200 } }
-            },
-            interactivity: {
-                detect_on: "canvas",
-                events: { onhover: { enable: true, mode: "grab" }, onclick: { enable: false }, resize: true },
-                modes: { grab: { distance: 180, line_linked: { opacity: 0.55 } } }
-            },
-            retina_detect: true
-        });
+        // Funkcja do pobrania przewodnika jako plik .txt
+        function downloadGuide() {
+            const guideContent = document.querySelector('.setup-content').innerText;
+            const blob = new Blob([guideContent], { type: 'text/plain' });
+            const a = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            a.href = url;
+            a.download = 'RXB_Setup_Guide.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            return false;
+        }
 
+        // ======================== ANIMACJA TŁA Z LITERAMI "RXB" ========================
+        const canvas = document.getElementById('rxb-canvas');
+        let ctx = canvas.getContext('2d');
+        let particles = [];
+        let animationId = null;
+        let mouseX = null, mouseY = null;
+        let canvasWidth, canvasHeight;
+
+        function resizeCanvas() {
+            canvasWidth = window.innerWidth;
+            canvasHeight = window.innerHeight;
+            canvas.width = canvasWidth;
+            canvas.height = canvasHeight;
+        }
+
+        class RXBParticle {
+            constructor(x, y, size, speedX, speedY, opacity) {
+                this.x = x;
+                this.y = y;
+                this.size = size;
+                this.speedX = speedX;
+                this.speedY = speedY;
+                this.opacity = opacity;
+                this.text = 'RXB';
+            }
+            draw() {
+                if (!ctx) return;
+                ctx.font = `${this.size}px 'Orbitron', monospace`;
+                ctx.fillStyle = `rgba(46, 204, 113, ${this.opacity})`;
+                ctx.fillText(this.text, this.x, this.y);
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > canvasWidth) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvasHeight) this.speedY *= -1;
+                this.x = Math.min(Math.max(this.x, 0), canvasWidth);
+                this.y = Math.min(Math.max(this.y, 0), canvasHeight);
+            }
+        }
+
+        function initParticles(count) {
+            particles = [];
+            const minSize = 5;
+            const maxSize = 12;
+            for (let i = 0; i < count; i++) {
+                let size = minSize + Math.random() * (maxSize - minSize);
+                let x = Math.random() * canvasWidth;
+                let y = Math.random() * canvasHeight;
+                let speedX = (Math.random() - 0.5) * 0.6;
+                let speedY = (Math.random() - 0.5) * 0.6;
+                let opacity = 0.2 + Math.random() * 0.5;
+                particles.push(new RXBParticle(x, y, size, speedX, speedY, opacity));
+            }
+        }
+
+        function drawLines() {
+            if (!ctx) return;
+            const maxDistance = 180;
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.hypot(dx, dy);
+                    if (distance < maxDistance) {
+                        const opacity = (1 - distance / maxDistance) * 0.4;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(46, 204, 113, ${opacity})`;
+                        ctx.lineWidth = 1.2;
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function drawMouseConnection() {
+            if (mouseX === null || mouseY === null) return;
+            for (let p of particles) {
+                const dx = p.x - mouseX;
+                const dy = p.y - mouseY;
+                const dist = Math.hypot(dx, dy);
+                if (dist < 180) {
+                    const opacity = (1 - dist / 180) * 0.6;
+                    ctx.beginPath();
+                    ctx.moveTo(p.x, p.y);
+                    ctx.lineTo(mouseX, mouseY);
+                    ctx.strokeStyle = `rgba(241, 196, 15, ${opacity})`;
+                    ctx.lineWidth = 1.5;
+                    ctx.stroke();
+                }
+            }
+        }
+
+        function animate() {
+            if (!ctx) return;
+            ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+            for (let p of particles) {
+                p.update();
+                p.draw();
+            }
+            drawLines();
+            drawMouseConnection();
+            animationId = requestAnimationFrame(animate);
+        }
+
+        function handleMouseMove(e) {
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+            mouseX = (e.clientX - rect.left) * scaleX;
+            mouseY = (e.clientY - rect.top) * scaleY;
+        }
+
+        function handleMouseLeave() {
+            mouseX = null;
+            mouseY = null;
+        }
+
+        function setupCanvas() {
+            resizeCanvas();
+            const particleCount = Math.min(100, Math.floor(window.innerWidth * window.innerHeight / 12000));
+            initParticles(particleCount);
+            animate();
+            window.addEventListener('resize', () => {
+                resizeCanvas();
+                initParticles(particleCount);
+            });
+            canvas.addEventListener('mousemove', handleMouseMove);
+            canvas.addEventListener('mouseleave', handleMouseLeave);
+        }
+
+        window.addEventListener('load', setupCanvas);
+
+        // ======================== FUNKCJE COOKIE I TŁUMACZEŃ ========================
         function setCookie(name, value, days) {
             let expires = "";
             if (days) { const date = new Date(); date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000)); expires = "; expires=" + date.toUTCString(); }
@@ -970,16 +1513,53 @@ Be good and do good.
         function acceptCookies() { setCookie('cookieConsent', 'accepted', 365); document.getElementById('cookieConsent').style.display = 'none'; }
         window.onload = function() { if (!getCookie('cookieConsent')) document.getElementById('cookieConsent').style.display = 'block'; };
 
+        // Tłumaczenia - działają poprawnie
         const translations = {
-            en: { heroDesc: '<span class="green-text">Record X core Blockchain</span>: a value transfer and evidentiary archiving system. Built for sovereignty.', miningNote: '⛏️ Run a full node and mine on your PC or laptop using RXB\'s built-in mining software.', btnSource: 'SOURCE CODE', btnWhitepaper: 'WHITE PAPER', btnWin: '⬇️ DOWNLOAD RXB FOR WINDOWS', btnLinux: '🐧 DOWNLOAD RXB TAR.GZ FOR LINUX', genesis: 'The Genesis Block reward was permanently sent to <span class="green-text">OP_RETURN</span>.' },
-            pl: { heroDesc: '<span class="green-text">Record X core Blockchain</span>: system transferu wartości i archiwizacji dowodowej. Stworzony dla suwerenności.', miningNote: '⛏️ Uruchom pełny węzeł i kop na swoim PC lub laptopie używając wbudowanego oprogramowania.', btnSource: 'KOD ŹRÓDŁOWY', btnWhitepaper: 'BIAŁA KSIĘGA', btnWin: '⬇️ POBIERZ RXB DLA WINDOWS', btnLinux: '🐧 POBIERZ RXB TAR.GZ DLA LINUX', genesis: 'Nagroda Bloku Genezis została trwale przekazana do <span class="green-text">OP_RETURN</span>.' },
-            de: { heroDesc: '<span class="green-text">Record X core Blockchain</span>: ein System für Wertübertragung und Beweisarchivierung. Für Souveränität.', miningNote: '⛏️ Betreiben Sie einen vollständigen Knoten und minen Sie mit der integrierten Software.', btnSource: 'QUELLCODE', btnWhitepaper: 'WHITEPAPER', btnWin: '⬇️ RXB FÜR WINDOWS', btnLinux: '🐧 RXB TAR.GZ FÜR LINUX', genesis: 'Die Belohnung des Genesis-Blocks wurde dauerhaft an <span class="green-text">OP_RETURN</span> gesendet.' },
-            fr: { heroDesc: '<span class="green-text">Record X core Blockchain</span> : transfert de valeur et archivage probant. Souveraineté.', miningNote: '⛏️ Exécutez un nœud complet et minez sur PC avec le logiciel intégré.', btnSource: 'CODE SOURCE', btnWhitepaper: 'LIVRE BLANC', btnWin: '⬇️ TÉLÉCHARGER RXB WINDOWS', btnLinux: '🐧 TÉLÉCHARGER RXB LINUX', genesis: 'La récompense du bloc Genesis a été envoyée à <span class="green-text">OP_RETURN</span>.' }
+            en: { 
+                heroDesc: 'Record X core Blockchain: Value transfer and evidentiary archiving system. Built for sovereignty.', 
+                miningNote: 'Run a full node and mine on your PC or laptop using RXB built in mining software.', 
+                btnSource: 'SOURCE CODE', 
+                btnWhitepaper: 'WHITE PAPER', 
+                btnWin: 'DOWNLOAD RXB FOR WINDOWS', 
+                btnLinux: 'DOWNLOAD RXB TAR.GZ FOR LINUX', 
+                genesis: 'The Genesis Block reward was permanently sent to OP_RETURN.' 
+            },
+            pl: { 
+                heroDesc: 'Record X core Blockchain: system transferu wartości i archiwizacji dowodowej. Stworzony dla suwerenności.', 
+                miningNote: 'Uruchom pełny węzeł i kop na swoim PC lub laptopie używając wbudowanego oprogramowania.', 
+                btnSource: 'KOD ŹRÓDŁOWY', 
+                btnWhitepaper: 'BIAŁA KSIĘGA', 
+                btnWin: 'POBIERZ RXB DLA WINDOWS', 
+                btnLinux: 'POBIERZ RXB TAR.GZ DLA LINUX', 
+                genesis: 'Nagroda Bloku Genezis została trwale przekazana do OP_RETURN.' 
+            },
+            de: { 
+                heroDesc: 'Record X core Blockchain: ein System für Wertübertragung und Beweisarchivierung. Für Souveränität.', 
+                miningNote: 'Betreiben Sie einen vollständigen Knoten und minen Sie mit der integrierten Software.', 
+                btnSource: 'QUELLCODE', 
+                btnWhitepaper: 'WHITEPAPER', 
+                btnWin: 'RXB FÜR WINDOWS', 
+                btnLinux: 'RXB TAR.GZ FÜR LINUX', 
+                genesis: 'Die Belohnung des Genesis-Blocks wurde dauerhaft an OP_RETURN gesendet.' 
+            },
+            fr: { 
+                heroDesc: 'Record X core Blockchain: transfert de valeur et archivage probant. Souveraineté.', 
+                miningNote: 'Exécutez un nœud complet et minez sur PC avec le logiciel intégré.', 
+                btnSource: 'CODE SOURCE', 
+                btnWhitepaper: 'LIVRE BLANC', 
+                btnWin: 'TÉLÉCHARGER RXB WINDOWS', 
+                btnLinux: 'TÉLÉCHARGER RXB LINUX', 
+                genesis: 'La récompense du bloc Genesis a été envoyée à OP_RETURN.' 
+            }
         };
+
         let currentLang = 'en';
         function changeLanguage(lang) {
             currentLang = lang;
-            document.querySelectorAll('.lang-btn').forEach(btn => { btn.classList.remove('active'); if (btn.innerText.trim().toLowerCase() === lang) btn.classList.add('active'); });
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-lang') === lang) btn.classList.add('active');
+            });
             const t = translations[lang];
             document.getElementById('hero-description').innerHTML = t.heroDesc;
             document.getElementById('mining-note').innerHTML = t.miningNote;
@@ -989,6 +1569,8 @@ Be good and do good.
             document.getElementById('btn-linux').innerHTML = t.btnLinux;
             document.getElementById('genesis-text').innerHTML = t.genesis;
         }
+
+        // Ustawienie początkowego języka (angielski)
         changeLanguage('en');
     </script>
 </body>
