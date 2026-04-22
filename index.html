@@ -82,7 +82,7 @@
 
         .main-logo {
             display: block;
-            width: 160px;
+            width: 200px;
             margin: 0 auto 2rem;
             animation: logoPulse 4s infinite ease-in-out;
         }
@@ -1296,7 +1296,7 @@ Cheers</pre>
         </div>
 
         <div class="bitcointalk-link animate-in">
-            <a href="https://bitcointalk.org/index.php?topic=5578560.msg66551820#msg66551820" target="_blank" rel="noopener noreferrer" id="bitcointalk-link">Join RXB Discussion on Bitcointalk Forum</a>
+            <a href="https://bitcointalk.org/index.php?topic=5578560.0;all" target="_blank" rel="noopener noreferrer" id="bitcointalk-link">Join RXB Discussion on Bitcointalk Forum</a>
         </div>
 
         <div class="gpg-signatures animate-in">
@@ -1557,7 +1557,6 @@ Cheers</pre>
             document.getElementById('linux-sig').innerHTML = t.linuxSig;
             document.getElementById('verify-text').innerHTML = t.verifyText;
             document.getElementById('genesis-text').innerHTML = t.genesis;
-            // Buttons text (source, whitepaper, win, linux) remain same as they are not language dependent? Actually they are static but we keep original.
             document.getElementById('btn-source').innerText = (lang === 'pl' ? 'KOD ŹRÓDŁOWY' : (lang === 'de' ? 'QUELLCODE' : (lang === 'fr' ? 'CODE SOURCE' : 'SOURCE CODE')));
             document.getElementById('btn-whitepaper').innerText = (lang === 'pl' ? 'BIAŁA KSIĘGA' : (lang === 'de' ? 'WHITEPAPER' : (lang === 'fr' ? 'LIVRE BLANC' : 'WHITE PAPER')));
             document.getElementById('btn-win').innerHTML = (lang === 'pl' ? 'POBIERZ RXB DLA WINDOWS' : (lang === 'de' ? 'RXB FÜR WINDOWS' : (lang === 'fr' ? 'TÉLÉCHARGER RXB WINDOWS' : 'DOWNLOAD RXB FOR WINDOWS')));
@@ -1567,3 +1566,4 @@ Cheers</pre>
         changeLanguage('en');
     </script>
 </body>
+</html>
