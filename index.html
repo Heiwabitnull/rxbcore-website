@@ -72,6 +72,8 @@
             padding-left: 15px;
             font-size: 1rem;
             text-transform: uppercase;
+            display: block;
+            margin: 0;
         }
 
         @keyframes logoPulse {
@@ -91,23 +93,23 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 1.5rem;
+            gap: 1.8rem;
             margin: 2rem auto 2rem;
-            max-width: 900px;
+            max-width: 950px;
             background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(4px);
             padding: 1.2rem 2rem;
             border: 1px solid var(--rxb-gold);
-            font-family: 'Orbitron', monospace;
-            font-size: 0.9rem;
-            font-weight: 800;
+            font-family: 'Courier New', monospace;
+            font-size: 1.15rem;
+            font-weight: 700;
             text-transform: uppercase;
             color: #000000;
             border-radius: 0;
         }
         .tech-specs div {
             white-space: nowrap;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
         }
 
         @keyframes fadeInUp {
@@ -134,12 +136,26 @@
             display: table;
             margin-left: auto;
             margin-right: auto;
-            padding: 0.6rem 2rem;
+            padding: 0.8rem 2rem;
             border: 1px solid var(--border);
             font-weight: 600;
             color: var(--rxb-dark-green);
             margin-bottom: 2rem;
             border-radius: 0;
+        }
+        .mining-note h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin: 0 0 0.35rem 0;
+            color: #1f8a4c;
+            text-transform: uppercase;
+        }
+        .mining-note p {
+            margin: 0;
+            font-weight: 600;
+            font-size: 1rem;
         }
 
         .button-row {
@@ -194,15 +210,42 @@
             font-size: 1.2rem;
             font-weight: 700;
             margin-top: 8px;
+            animation: pulseSupply 2.2s infinite ease-in-out;
+        }
+        @keyframes pulseSupply {
+            0% { opacity: 0.7; text-shadow: 0 0 0px rgba(31, 138, 76, 0); }
+            50% { opacity: 1; text-shadow: 0 0 6px rgba(31, 138, 76, 0.5); }
+            100% { opacity: 0.7; text-shadow: 0 0 0px rgba(31, 138, 76, 0); }
+        }
+
+        .bitcointalk-link {
+            text-align: center;
+            margin: 3rem 0 2rem;
+        }
+        .bitcointalk-link a {
+            display: inline-block;
+            background: var(--rxb-gold);
+            color: #2d3436;
+            padding: 0.8rem 2rem;
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            transition: 0.2s;
+            border: 1px solid var(--rxb-dark-green);
+            border-radius: 0;
+        }
+        .bitcointalk-link a:hover {
+            background: var(--rxb-dark-green);
+            color: white;
         }
 
         .genesis-card {
-            margin: 4rem 0;
-            padding: 3rem;
+            margin: 2rem 0 4rem;
+            padding: 2rem;
             background: white;
             border: 1px solid var(--rxb-silver);
             border-top: 6px solid var(--rxb-gold);
-            text-align: center;
+            text-align: left;
             box-shadow: var(--shadow);
             border-radius: 0;
         }
@@ -210,32 +253,30 @@
             font-family: 'Orbitron', sans-serif;
             letter-spacing: 3px;
             color: var(--rxb-gold);
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
         }
-        .genesis-hash, .genesis-txid {
+        .genesis-pre {
             font-family: 'Courier New', monospace;
-            background: var(--rxb-silver);
-            padding: 10px;
+            font-weight: 600;
             font-size: 0.9rem;
-            font-weight: 700;
-            display: inline-block;
-            margin: 15px 0;
-            color: #000000;
-            word-break: break-all;
-            border-radius: 0;
+            line-height: 1.6;
+            background: #fefef7;
+            padding: 1.5rem;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            color: #2d3436;
+            border: 1px solid var(--rxb-silver);
+            margin-bottom: 1rem;
         }
-        .genesis-txid {
-            font-size: 0.85rem;
-        }
-        .genesis-card p {
-            font-weight: 700;
-            color: #000000;
-        }
-        .genesis-card .p2p-note {
-            margin-top: 1.5rem;
+        .genesis-p2p {
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
             font-size: 0.9rem;
-            color: #000000;
-            font-weight: 700;
+            text-align: center;
+            margin-top: 1rem;
+            color: var(--rxb-dark-green);
         }
 
         .whitepaper-container {
@@ -332,26 +373,6 @@
         .setup-content .download-btn:hover {
             background: var(--rxb-dark-green);
             transform: scale(1.02);
-        }
-        .bitcointalk-link {
-            text-align: center;
-            margin: 2rem 0;
-        }
-        .bitcointalk-link a {
-            display: inline-block;
-            background: var(--rxb-gold);
-            color: #2d3436;
-            padding: 0.8rem 2rem;
-            text-decoration: none;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: bold;
-            transition: 0.2s;
-            border: 1px solid var(--rxb-dark-green);
-            border-radius: 0;
-        }
-        .bitcointalk-link a:hover {
-            background: var(--rxb-dark-green);
-            color: white;
         }
 
         .gpg-signatures {
@@ -483,7 +504,7 @@
 
     <div class="wrapper">
         <div class="header-bar animate-in">
-            <div class="brand">RXB · Record X‑core Blockchain</div>
+            <h1 class="brand">RXB · Record X‑core Decentralized Blockchain</h1>
             <div class="lang-selector">
                 <button class="lang-btn active" data-lang="en" onclick="changeLanguage('en')">EN</button>
                 <button class="lang-btn" data-lang="pl" onclick="changeLanguage('pl')">PL</button>
@@ -512,7 +533,8 @@
         </div>
 
         <div class="mining-note animate-in" id="mining-note">
-             Run a full node and perform block mining on your PC or laptop using RXB built-in software.
+            <h2>Mining</h2>
+            <p>Run a full node and perform block mining on your PC or laptop using RXB built-in software.</p>
         </div>
 
         <div class="button-row animate-in">
@@ -523,14 +545,6 @@
         <div class="button-row animate-in">
             <a href="https://github.com/Heiwabitnull/rxb-core-binaries/raw/main/RXBforWin/rxb-0.1.0-win64-setup.exe" class="btn" download id="btn-win">DOWNLOAD RXB FOR WINDOWS</a>
             <a href="https://github.com/Heiwabitnull/rxb-core-binaries/raw/main/RXBforLinux/rxb-0.1.0-linux64.tar.gz" class="btn" download id="btn-linux">DOWNLOAD RXB TAR.GZ FOR LINUX</a>
-        </div>
-
-        <div class="genesis-card animate-in">
-            <h2>GENESIS</h2>
-            <div class="genesis-hash">Block hash: 0000000014766203f48e47b0c76ac24c9c23a1c9aeacce12c4e3648194f68b50</div>
-            <div class="genesis-txid">Transaction ID: 2f41a21f88d745bdeeff375226e5a8b676381157cdd8106459a1cf27a194bc10</div>
-            <p id="genesis-text">Genesis Block reward was permanently sent to OP_RETURN.</p>
-            <p class="p2p-note">P2P port: 8327</p>
         </div>
 
         <div class="whitepaper-container animate-in">
@@ -979,10 +993,6 @@ RXB
 Allows users to record permanent Proof of Existence data via the OP_RETURN field. 
 Simply each entry uses a separate address in the UTXO model every record remains autonomous.
 
-
-
- 
-
 I wish you success in mining. 
 
 Be good and do good.
@@ -1299,6 +1309,58 @@ Cheers</pre>
             <a href="https://bitcointalk.org/index.php?topic=5578560.0;all" target="_blank" rel="noopener noreferrer" id="bitcointalk-link">Join RXB Discussion on Bitcointalk Forum</a>
         </div>
 
+        <div class="genesis-card animate-in">
+            <h2>GENESIS</h2>
+            <div class="genesis-pre">{
+  "hash": "0000000014766203f48e47b0c76ac24c9c23a1c9aeacce12c4e3648194f68b50",
+  "strippedsize": 359,
+  "size": 359,
+  "weight": 1436,
+  "height": 0,
+  "version": 1,
+  "versionHex": "00000001",
+  "merkleroot": "2f41a21f88d745bdeeff375226e5a8b676381157cdd8106459a1cf27a194bc10",
+  "tx": [
+    {
+      "txid": "2f41a21f88d745bdeeff375226e5a8b676381157cdd8106459a1cf27a194bc10",
+      "hash": "2f41a21f88d745bdeeff375226e5a8b676381157cdd8106459a1cf27a194bc10",
+      "version": 1,
+      "size": 278,
+      "vsize": 278,
+      "weight": 1112,
+      "locktime": 0,
+      "vin": [
+        {
+          "coinbase": "04ffff001d01044c675468652045636f6e6f6d69737420466562727561727920323874682d4d617263682036746820323032362044696767696e6720666f7220566963746f727920546865206461756e74696e6720717565737420666f7220637269746963616c206d696e6572616c73",
+          "sequence": 4294967295
+        }
+      ],
+      "vout": [
+        {
+          "value": 100.00000000,
+          "n": 0,
+          "scriptPubKey": {
+            "asm": "OP_RETURN 5468652045636f6e6f6d69737420466562727561727920323874682d4d617263682036746820323032362044696767696e6720666f7220566963746f727920546865206461756e74696e6720717565737420666f7220637269746963616c206d696e6572616c73",
+            "hex": "6a4c675468652045636f6e6f6d69737420466562727561727920323874682d4d617263682036746820323032362044696767696e6720666f7220566963746f727920546865206461756e74696e6720717565737420666f7220637269746963616c206d696e6572616c73",
+            "type": "nulldata"
+          }
+        }
+      ],
+      "hex": "01000000010000000000000000000000000000000000000000000000000000000000000000ffffffff7004ffff001d01044c675468652045636f6e6f6d69737420466562727561727920323874682d4d617263682036746820323032362044696767696e6720666f7220566963746f727920546865206461756e74696e6720717565737420666f7220637269746963616c206d696e6572616c73ffffffff0100e40b54020000006a6a4c675468652045636f6e6f6d69737420466562727561727920323874682d4d617263682036746820323032362044696767696e6720666f7220566963746f727920546865206461756e74696e6720717565737420666f7220637269746963616c206d696e6572616c7300000000"
+    }
+  ],
+  "time": 1772313120,
+  "mediantime": 1772313120,
+  "nonce": 3775284435,
+  "bits": "1d00ffff",
+  "difficulty": 1,
+  "chainwork": "0000000000000000000000000000000000000000000000000000000100010001",
+  "nTx": 1,
+  "nextblockhash": "00000000b06f47c2495648ed3cfcbf4063223fb163e2936bc08a6101ad6fec95"
+}</div>
+            <div class="genesis-p2p">P2P port: 8327</div>
+        </div>
+
         <div class="gpg-signatures animate-in">
             <h3 id="gpg-title">GPG SIGNATURES</h3>
             <div class="gpg-links">
@@ -1483,57 +1545,53 @@ Cheers</pre>
                 hero: 'Record X core Blockchain: Value transfer and evidentiary archiving system. Built for sovereignty.',
                 torNotice: 'RXB blockchain has now bridges for easy start just install & run node to enjoy block mining on your PC or use seed onion for better privacy.',
                 coinSupply: 'Only 39,000,000 coins can be mined',
-                miningNote: 'Run a full node and perform block mining on your PC or laptop using RXB built-in software.',
+                miningNote: '<h2>Mining</h2><p>Run a full node and perform block mining on your PC or laptop using RXB built-in software.</p>',
                 setupTitle: 'RXB : Record X-core Blockchain',
                 setupSubtitle: 'Complete RXB Node Setup Guide',
                 bitcointalk: 'Join RXB Discussion on Bitcointalk Forum',
                 gpgTitle: 'GPG SIGNATURES',
                 winSig: 'Windows signature (.asc)',
                 linuxSig: 'Linux signature (.asc)',
-                verifyText: 'Verify integrity with GPG signatures for both binaries',
-                genesis: 'Genesis Block reward was permanently sent to OP_RETURN.'
+                verifyText: 'Verify integrity with GPG signatures for both binaries'
             },
             pl: {
                 hero: 'Record X core Blockchain: system transferu wartości i archiwizacji dowodowej. Stworzony dla suwerenności.',
                 torNotice: 'RXB blockchain posiada teraz bridge ułatwiające start, wystarczy zainstalować i uruchomić węzeł, aby cieszyć się kopaniem bloków na swoim komputerze lub użyć seed onion dla lepszej prywatności.',
                 coinSupply: 'Tylko 39 000 000 monet może zostać wykopanych',
-                miningNote: 'Uruchom pełny węzeł i wykonuj kopanie bloków na swoim komputerze lub laptopie używając wbudowanego oprogramowania RXB.',
+                miningNote: '<h2>Kopanie</h2><p>Uruchom pełny węzeł i wykonuj kopanie bloków na swoim komputerze lub laptopie używając wbudowanego oprogramowania RXB.</p>',
                 setupTitle: 'RXB : Record X-core Blockchain',
                 setupSubtitle: 'Kompletny przewodnik konfiguracji węzła RXB',
                 bitcointalk: 'Dołącz do dyskusji RXB na forum Bitcointalk',
                 gpgTitle: 'PODPISY GPG',
                 winSig: 'Podpis Windows (.asc)',
                 linuxSig: 'Podpis Linux (.asc)',
-                verifyText: 'Zweryfikuj integralność za pomocą podpisów GPG dla obu plików binarnych',
-                genesis: 'Nagroda Bloku Genezis została trwale przekazana do OP_RETURN.'
+                verifyText: 'Zweryfikuj integralność za pomocą podpisów GPG dla obu plików binarnych'
             },
             de: {
                 hero: 'Record X core Blockchain: ein System für Wertübertragung und Beweisarchivierung. Für Souveränität.',
                 torNotice: 'RXB Blockchain hat jetzt Brücken für einen einfachen Start, installieren Sie einfach und starten Sie einen Knoten, um Blockabbau auf Ihrem PC zu genießen oder verwenden Sie seed onion für bessere Privatsphäre.',
                 coinSupply: 'Nur 39.000.000 Coins können abgebaut werden',
-                miningNote: 'Betreiben Sie einen vollständigen Knoten und führen Sie Blockabbau auf Ihrem PC oder Laptop mit der integrierten RXB-Software durch.',
+                miningNote: '<h2>Mining</h2><p>Betreiben Sie einen vollständigen Knoten und führen Sie Blockabbau auf Ihrem PC oder Laptop mit der integrierten RXB-Software durch.</p>',
                 setupTitle: 'RXB : Record X-core Blockchain',
                 setupSubtitle: 'Vollständige RXB Knoten-Setup-Anleitung',
                 bitcointalk: 'Nehmen Sie an der RXB-Diskussion im Bitcointalk-Forum teil',
                 gpgTitle: 'GPG SIGNATUREN',
                 winSig: 'Windows-Signatur (.asc)',
                 linuxSig: 'Linux-Signatur (.asc)',
-                verifyText: 'Überprüfen Sie die Integrität mit GPG-Signaturen für beide Binärdateien',
-                genesis: 'Die Belohnung des Genesis-Blocks wurde dauerhaft an OP_RETURN gesendet.'
+                verifyText: 'Überprüfen Sie die Integrität mit GPG-Signaturen für beide Binärdateien'
             },
             fr: {
                 hero: 'Record X core Blockchain: transfert de valeur et archivage probant. Souveraineté.',
                 torNotice: 'La blockchain RXB dispose désormais de ponts pour un démarrage facile, installez et exécutez un nœud pour profiter de l\'extraction de blocs sur votre PC ou utilisez seed onion pour une meilleure confidentialité.',
                 coinSupply: 'Seulement 39 000 000 de pièces peuvent être extraites',
-                miningNote: 'Exécutez un nœud complet et effectuez l\'extraction de blocs sur votre PC ou ordinateur portable en utilisant le logiciel intégré RXB.',
+                miningNote: '<h2>Minage</h2><p>Exécutez un nœud complet et effectuez l\'extraction de blocs sur votre PC ou ordinateur portable en utilisant le logiciel intégré RXB.</p>',
                 setupTitle: 'RXB : Record X-core Blockchain',
                 setupSubtitle: 'Guide complet de configuration du nœud RXB',
                 bitcointalk: 'Rejoignez la discussion RXB sur le forum Bitcointalk',
                 gpgTitle: 'SIGNATURES GPG',
                 winSig: 'Signature Windows (.asc)',
                 linuxSig: 'Signature Linux (.asc)',
-                verifyText: 'Vérifiez l\'intégrité avec les signatures GPG pour les deux binaires',
-                genesis: 'La récompense du bloc Genesis a été envoyée à OP_RETURN.'
+                verifyText: 'Vérifiez l\'intégrité avec les signatures GPG pour les deux binaires'
             }
         };
 
@@ -1556,7 +1614,6 @@ Cheers</pre>
             document.getElementById('win-sig').innerHTML = t.winSig;
             document.getElementById('linux-sig').innerHTML = t.linuxSig;
             document.getElementById('verify-text').innerHTML = t.verifyText;
-            document.getElementById('genesis-text').innerHTML = t.genesis;
             document.getElementById('btn-source').innerText = (lang === 'pl' ? 'KOD ŹRÓDŁOWY' : (lang === 'de' ? 'QUELLCODE' : (lang === 'fr' ? 'CODE SOURCE' : 'SOURCE CODE')));
             document.getElementById('btn-whitepaper').innerText = (lang === 'pl' ? 'BIAŁA KSIĘGA' : (lang === 'de' ? 'WHITEPAPER' : (lang === 'fr' ? 'LIVRE BLANC' : 'WHITE PAPER')));
             document.getElementById('btn-win').innerHTML = (lang === 'pl' ? 'POBIERZ RXB DLA WINDOWS' : (lang === 'de' ? 'RXB FÜR WINDOWS' : (lang === 'fr' ? 'TÉLÉCHARGER RXB WINDOWS' : 'DOWNLOAD RXB FOR WINDOWS')));
